@@ -2,14 +2,15 @@
   "name": "src",
   "main": "./lib/src",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description":
+    "Atom extension to transclude list items into markdown files",
   "keywords": [
   ],
   "activationCommands": {
     "atom-workspace": "src:toggle"
   },
-  "repository": "https://github.com/atom/src",
-  "license": "MIT",
+  "repository": "https://github.com/beadsland/toclude",
+  "license": "Apache 2.0",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
