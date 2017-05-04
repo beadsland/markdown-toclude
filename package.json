@@ -1,19 +1,20 @@
 {
-  "name": "src",
-  "main": "./lib/src",
+  "name": "sourcefetch",
+  "main": "./lib/sourcefetch",
   "version": "0.0.0",
-  "description":
-    "Atom extension to transclude list items into markdown files",
-  "keywords": [
-  ],
+  "description": "Atom extension to transclude list items into markdown files",
+  "keywords": [],
   "activationCommands": {
-    "atom-workspace": "src:toggle"
+    "atom-workspace": "sourcefetch:fetch"
   },
   "repository": "https://github.com/beadsland/toclude",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0"
   }
 }

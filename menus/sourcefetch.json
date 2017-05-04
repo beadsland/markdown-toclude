@@ -2,8 +2,8 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Toggle src",
-        "command": "src:toggle"
+        "label": "Fetch code",
+        "command": "sourcefetch:fetch"
       }
     ]
   },
@@ -12,11 +12,11 @@
       "label": "Packages",
       "submenu": [
         {
-          "label": "src",
+          "label": "sourcefetch",
           "submenu": [
             {
-              "label": "Toggle",
-              "command": "src:toggle"
+              "label": "Fetch code",
+              "command": "sourcefetch:fetch"
             }
           ]
         }
