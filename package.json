@@ -2,17 +2,15 @@
   "name": "toclude",
   "main": "./lib/toclude",
   "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [
-  ],
+  "description": "Atom plugin to transclude list items into markdown files",
+  "keywords": [],
   "activationCommands": {
     "atom-workspace": "toclude:toggle"
   },
-  "repository": "https://github.com/atom/toclude",
-  "license": "MIT",
+  "repository": "https://github.com/beadsland/toclude",
+  "license": "Apache-2.0",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": { }
 }
