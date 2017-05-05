@@ -2,19 +2,17 @@
   "name": "toclude",
   "main": "./lib/toclude",
   "version": "0.0.0",
-  "description": "Atom extension to transclude list items into markdown files",
-  "keywords": [],
+  "description": "A short description of your package",
+  "keywords": [
+  ],
   "activationCommands": {
-    "atom-workspace": "toclude:fetch"
+    "atom-workspace": "toclude:toggle"
   },
-  "repository": "https://github.com/beadsland/toclude",
-  "license": "Apache-2.0",
+  "repository": "https://github.com/atom/toclude",
+  "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0"
+  "dependencies": {
   }
 }
