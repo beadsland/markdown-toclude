@@ -8,13 +8,16 @@ module.exports = Toclude =
 
   activate: (state) ->
     @tocludeView = new TocludeView(state.tocludeViewState)
-    @modalPanel = atom.workspace.addModalPanel(item: @tocludeView.getElement(), visible: false)
+    @modalPanel = atom.workspace.addModalPanel(item: @tocludeView.getElement(),
+                                               visible: false)
 
-    # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
+    # Events subscribed to in atom's system can be easily cleaned up
+    # with a CompositeDisposable
     @subscriptions = new CompositeDisposable
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'toclude:toggle': => @toggle()
+    @subscriptions.add atom.commands.add 'atom-workspace',
+                                         'toclude:toggle': => @toggle()
 
   deactivate: ->
     @modalPanel.destroy()
@@ -30,4 +33,12 @@ module.exports = Toclude =
     if @modalPanel.isVisible()
       @modalPanel.hide()
     else
+      editor = atom.workspace.getActiveTextEditor()
+      words = editor.getText().split(/\s+/).length
+      @tocludeView.setCount(words)
       @modalPanel.show()
+
+#    if @modalPanel.isVisible()
+#      @modalPanel.hide()
+#    else
+#      @modalPanel.show()
