@@ -1,11 +1,11 @@
 {
-  "name": "sourcefetch",
-  "main": "./lib/sourcefetch",
+  "name": "toclude",
+  "main": "./lib/toclude",
   "version": "0.0.0",
   "description": "Atom extension to transclude list items into markdown files",
   "keywords": [],
   "activationCommands": {
-    "atom-workspace": "sourcefetch:fetch"
+    "atom-workspace": "toclude:fetch"
   },
   "repository": "https://github.com/beadsland/toclude",
   "license": "Apache-2.0",

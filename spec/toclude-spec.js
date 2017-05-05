@@ -1,44 +1,44 @@
 'use babel';
 
-import Src from '../lib/src';
+import Toclude from '../lib/toclude';
 
 // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 //
 // To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
 // or `fdescribe`). Remove the `f` to unfocus the block.
 
-describe('Src', () => {
+describe('Toclude', () => {
   let workspaceElement, activationPromise;
 
   beforeEach(() => {
     workspaceElement = atom.views.getView(atom.workspace);
-    activationPromise = atom.packages.activatePackage('src');
+    activationPromise = atom.packages.activatePackage('toclude');
   });
 
-  describe('when the src:toggle event is triggered', () => {
+  describe('when the toclude:toggle event is triggered', () => {
     it('hides and shows the modal panel', () => {
       // Before the activation event the view is not on the DOM, and no panel
       // has been created
-      expect(workspaceElement.querySelector('.src')).not.toExist();
+      expect(workspaceElement.querySelector('.toclude')).not.toExist();
 
       // This is an activation event, triggering it will cause the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'src:toggle');
+      atom.commands.dispatch(workspaceElement, 'toclude:toggle');
 
       waitsForPromise(() => {
         return activationPromise;
       });
 
       runs(() => {
-        expect(workspaceElement.querySelector('.src')).toExist();
+        expect(workspaceElement.querySelector('.toclude')).toExist();
 
-        let srcElement = workspaceElement.querySelector('.src');
-        expect(srcElement).toExist();
+        let tocludeElement = workspaceElement.querySelector('.toclude');
+        expect(tocludeElement).toExist();
 
-        let srcPanel = atom.workspace.panelForItem(srcElement);
-        expect(srcPanel.isVisible()).toBe(true);
-        atom.commands.dispatch(workspaceElement, 'src:toggle');
-        expect(srcPanel.isVisible()).toBe(false);
+        let tocludePanel = atom.workspace.panelForItem(tocludeElement);
+        expect(tocludePanel.isVisible()).toBe(true);
+        atom.commands.dispatch(workspaceElement, 'toclude:toggle');
+        expect(tocludePanel.isVisible()).toBe(false);
       });
     });
 
@@ -51,11 +51,11 @@ describe('Src', () => {
       // workspaceElement to the DOM are generally slower than those off DOM.
       jasmine.attachToDOM(workspaceElement);
 
-      expect(workspaceElement.querySelector('.src')).not.toExist();
+      expect(workspaceElement.querySelector('.toclude')).not.toExist();
 
       // This is an activation event, triggering it causes the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'src:toggle');
+      atom.commands.dispatch(workspaceElement, 'toclude:toggle');
 
       waitsForPromise(() => {
         return activationPromise;
@@ -63,10 +63,10 @@ describe('Src', () => {
 
       runs(() => {
         // Now we can test for view visibility
-        let srcElement = workspaceElement.querySelector('.src');
-        expect(srcElement).toBeVisible();
-        atom.commands.dispatch(workspaceElement, 'src:toggle');
-        expect(srcElement).not.toBeVisible();
+        let tocludeElement = workspaceElement.querySelector('.toclude');
+        expect(tocludeElement).toBeVisible();
+        atom.commands.dispatch(workspaceElement, 'toclude:toggle');
+        expect(tocludeElement).not.toBeVisible();
       });
     });
   });

@@ -1,8 +1,8 @@
 'use babel';
 
-import SourcefetchView from '../lib/sourcefetch-view';
+import TocludeView from '../lib/toclude-view';
 
-describe('SourcefetchView', () => {
+describe('TocludeView', () => {
   it('has one valid test', () => {
     expect('life').toBe('easy');
   });
