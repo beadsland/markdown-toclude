@@ -1,6 +1,13 @@
 TODO
 ====
 
+Housekeeping
+============
+
+-	omit template code
+-	review licensing
+-	refactor activation
+
 Prep for insertion of block if not found
 ========================================
 
@@ -20,7 +27,7 @@ Prep for insertion of block if not found
 Prep for insertion of transcluded content
 =========================================
 
--	find first comment in non-block
+-	find first list item in non-block
 -	find specified block
 -	if specified block not found, find open tag for our block
 -	if found only open tag, insert close tag
