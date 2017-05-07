@@ -1,8 +1,6 @@
 {CompositeDisposable} = require 'atom'
 
-#TocludeView = require './toclude-view'
-
-Test = require './test'
+Block = require './block'
 
 module.exports = Toclude =
   subscriptions: null
@@ -10,17 +8,18 @@ module.exports = Toclude =
   activate: (state) ->
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add 'atom-workspace',
-                                         'toclude:toggle': => @toggle()
+                                         'toclude:run': => @run()
 
   deactivate: ->
-    @modalPanel.destroy()    @subscriptions.dispose()
+    @subscriptions.dispose()
 
   serialize: ->
     tocludeViewState: @tocludeView.serialize()
 
-  toggle: ->
-    console.log 'Toclude was toggled!'
+  run: ->
+    atom.notifications.addSuccess('toclude running')
 
-    atom.notifications.addSuccess(Test.hello)
-
-    Test.testfunc()
+    editor = atom.workspace.getActiveTextEditor()
+    if (editor)
+      text = editor.getBuffer().getText()
+      Block.testfunc(text)

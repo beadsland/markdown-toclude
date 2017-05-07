@@ -1,17 +1,9 @@
 TODO
 ====
 
-Housekeeping
-============
-
--	refactor toggle
-
 Prep for insertion of block if not found
 ========================================
 
--	refactor (former) constants to package context
--	take text as parameter
--	refactor test to blocks
 -	find block close comments
 -	error on duplicate close comments
 -	find close block open comments
