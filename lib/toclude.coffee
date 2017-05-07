@@ -22,7 +22,12 @@ module.exports = Toclude =
     editor = atom.workspace.getActiveTextEditor()
     if (editor)
       text = editor.getBuffer().getText()
-      result = Block.find_block_closers(text)
-      if (result?)
-        note.addInfo "found #{b.block} from #{b.start} to #{b.end}" \
-                                                  for b in result
+      closers = Block.find_block_closers(text)
+      note.addInfo("#{closers.length}")
+      if closers?
+        saw = []
+        for b in closers
+          note.addInfo("looking at #{b.name}")
+          if saw[b.name] is true
+            note.addError("Block closer /#{b.name} must be unique.")
+          else saw[b.name] = true

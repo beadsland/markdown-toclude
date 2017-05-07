@@ -12,6 +12,6 @@ module.exports =
 
     if (RegExp(pattern).test(text))
       re = RegExp(pattern, 'g')
-      result = while (m = re.exec(text); m?)
-        {block: m[1], start: m.index, end: m.index + m[0].length - 1}
+      while (m = re.exec(text); m?)
+        {name: m[1], start: m.index, end: m.index + m[0].length - 1}
     else return null

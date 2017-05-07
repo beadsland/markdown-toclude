@@ -2,7 +2,7 @@ blah
 
 <!-- BLEGH -->
 
-blah babel<!-- /BLEGH -->
+blah babel<!-- /BLAH -->
 
 <!-- TOCLUDE: -->
 
