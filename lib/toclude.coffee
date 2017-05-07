@@ -14,7 +14,6 @@ module.exports = Toclude =
     @subscriptions.dispose()
 
   serialize: ->
-    tocludeViewState: @tocludeView.serialize()
 
   run: ->
     atom.notifications.addSuccess('toclude running')
