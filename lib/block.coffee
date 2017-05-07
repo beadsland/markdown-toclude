@@ -13,7 +13,7 @@ module.exports =
       re = RegExp(pattern, 'g')
       while m = re.exec(text)
         {name: m[1], start: m.index, end: m.index + m[0].length - 1}
-    else return null
+    else return []
 
   find_block_closers: (text) -> @find_tag_comments(text, cComTag)
 
