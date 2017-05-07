@@ -48,8 +48,11 @@ module.exports = Toclude =
         else
           deny "Block /#{close.name} must have a matching block open comment."
       else
-        openers = Block.find_block_openers(text.slice(close.end+1))
-        openers = (item for item in openers when item.name is close.name)
-        if (openers.length)
-          deny "Block open comment #{close.name} must not trail \
-                close comment /#{close.name}."
+        if (openers.length > 1)
+          deny "Block open comment #{dup.name} must be unique."
+        else
+          openers = Block.find_block_openers(text.slice(close.end+1))
+          openers = (item for item in openers when item.name is close.name)
+          if (openers.length)
+            deny "Block open comment #{close.name} must not trail \
+                  close comment /#{close.name}."
