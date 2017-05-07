@@ -4,9 +4,7 @@ TODO
 Housekeeping
 ============
 
--	omit template code
--	review licensing
--	refactor activation
+-	refactor toggle
 
 Prep for insertion of block if not found
 ========================================
