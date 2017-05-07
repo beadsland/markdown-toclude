@@ -16,9 +16,13 @@ module.exports = Toclude =
   serialize: ->
 
   run: ->
-    atom.notifications.addSuccess('toclude running')
+    note = atom.notifications
+    note.addSuccess('toclude running')
 
     editor = atom.workspace.getActiveTextEditor()
     if (editor)
       text = editor.getBuffer().getText()
-      Block.testfunc(text)
+      result = Block.find_block_closers(text)
+      if (result?)
+        note.addInfo "found #{b.block} from #{b.start} to #{b.end}" \
+                                                  for b in result
