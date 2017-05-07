@@ -37,22 +37,16 @@ module.exports = Toclude =
 
     for close in closers
       note.addInfo(close.name)
+      openers = Block.find_block_openers(text.slice(close.end+1))
+      openers = (item for item in openers when item.name is close.name)
+      if (openers.length)
+        deny "Block open comment #{close.name} must not trail \
+              block close comment /#{close.name}."
+
       openers = Block.find_block_openers(text.slice(0, close.start-1))
       openers = (item for item in openers when item.name is close.name)
       if (not openers.length)
-        openers = Block.find_block_openers(text.slice(close.end+1))
-        openers = (item for item in openers when item.name is close.name)
-        if (openers.length)
-          deny "Block open comment #{close.name} must not trail \
-                close comment /#{close.name}."
-        else
-          deny "Block /#{close.name} must have a matching block open comment."
-      else
-        if (openers.length > 1)
-          deny "Block open comment #{dup.name} must be unique."
-        else
-          openers = Block.find_block_openers(text.slice(close.end+1))
-          openers = (item for item in openers when item.name is close.name)
-          if (openers.length)
-            deny "Block open comment #{close.name} must not trail \
-                  close comment /#{close.name}."
+        deny "Block close comment /#{close.name} must have a \
+              matching block open comment."
+      if (openers.length > 1)
+        deny "Block open comment #{close.name} must be unique."

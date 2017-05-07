@@ -4,12 +4,8 @@ TODO
 Prep for insertion of block if not found
 ========================================
 
--	find close block open comments
--	error on duplicate open comments
--	error on trailing open comments
--	error on no open comment
 -	one func return array of all comment blocks
--	one func return array of all non-block comment tags
+-	one func return array of all TOCLUDE comment instruction tags
 -	one func return array of all non-block passages
 
 Prep for insertion of transcluded content
