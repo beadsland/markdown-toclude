@@ -58,3 +58,16 @@ module.exports =
             deny "Block #{t.name} must not overlap with block #{b.name}."
 
     return blocks # find_blocks_from_closers
+
+  find_nonblocks_from_blocks: (text, blocks) ->
+    nonblocks = []
+    unless (blocks.length)
+      nonblocks = [{start: 0, end: text.length - 1}]
+    else
+      nonblocks = for i in [0 .. blocks.length - 1]
+        if i is 0 then {start: 0, end: blocks[0].start - 1}
+        else
+          {start: blocks[i-1].end + 1, end: blocks[i].start - 1}
+      nonblocks.push {start: blocks[blocks.length - 1].end, \
+                       end: text.length}
+    return nonblocks

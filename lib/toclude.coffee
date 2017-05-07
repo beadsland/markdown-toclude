@@ -34,3 +34,8 @@ module.exports = Toclude =
 
     for b in blocks
       note.addInfo("block #{b.name} from #{b.start} to #{b.end}")
+
+    nonblocks = Block.find_nonblocks_from_blocks(text, blocks)
+
+    for n in nonblocks
+      note.addInfo("nonblock from #{n.start} to #{n.end}")

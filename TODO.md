@@ -4,7 +4,6 @@ TODO
 Prep for insertion of block if not found
 ========================================
 
--	one func return array of all non-block passages
 -	one func return array of all TOCLUDE comment instruction tags
 
 Prep for insertion of transcluded content
