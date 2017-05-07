@@ -1,6 +1,8 @@
 {CompositeDisposable} = require 'atom'
+note = atom.notifications
 
 Block = require './block'
+Util = require './util'
 
 module.exports = Toclude =
   subscriptions: null
@@ -16,18 +18,14 @@ module.exports = Toclude =
   serialize: ->
 
   run: ->
-    note = atom.notifications
     note.addSuccess('toclude running')
+    try @do_run() catch error then note.addError("#{error}")
 
-    editor = atom.workspace.getActiveTextEditor()
-    if (editor)
-      text = editor.getBuffer().getText()
-      closers = Block.find_block_closers(text)
-      note.addInfo("#{closers.length}")
-      if closers?
-        saw = []
-        for b in closers
-          note.addInfo("looking at #{b.name}")
-          if saw[b.name] is true
-            note.addError("Block closer /#{b.name} must be unique.")
-          else saw[b.name] = true
+  do_run: ->
+    return unless editor = atom.workspace.getActiveTextEditor()
+    text = editor.getBuffer().getText()
+    
+    closers = Block.find_block_closers(text)
+    if Util.duped(closers)
+      throw Error("Block closer /#{dup.name} must be unique.")
+    note.addInfo("no dups found")

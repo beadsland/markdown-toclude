@@ -4,7 +4,6 @@ TODO
 Prep for insertion of block if not found
 ========================================
 
--	error on duplicate close comments
 -	find close block open comments
 -	error on duplicate open comments
 -	error on trailing open comments
