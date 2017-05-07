@@ -1,8 +1,10 @@
 {CompositeDisposable} = require 'atom'
-note = atom.notifications
 
 Block = require './block'
 Util = require './util'
+
+note = atom.notifications
+deny = (err) -> throw {guard: true, message: err}
 
 module.exports = Toclude =
   subscriptions: null
@@ -19,13 +21,16 @@ module.exports = Toclude =
 
   run: ->
     note.addSuccess('toclude running')
-    try @do_run() catch error then note.addError("#{error}")
+    try @do_run() catch error
+      if error.guard? then note.addError("#{error.message}")
+      else note.addFatalError(error.stack)
 
   do_run: ->
     return unless editor = atom.workspace.getActiveTextEditor()
     text = editor.getBuffer().getText()
-    
+
     closers = Block.find_block_closers(text)
-    if Util.duped(closers)
-      throw Error("Block closer /#{dup.name} must be unique.")
+
+    dup = Util.duped(closers)
+    if dup? then deny "Block closer /#{dup.name} must be unique."
     note.addInfo("no dups found")
