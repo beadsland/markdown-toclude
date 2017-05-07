@@ -36,7 +36,6 @@ module.exports = Toclude =
     note.addInfo("no dups found")
 
     blocks = for close in closers
-      note.addInfo(close.name)
       openers = Block.find_block_openers(text.slice(close.end+1))
       openers = (item for item in openers when item.name is close.name)
       if (openers.length)
@@ -52,7 +51,14 @@ module.exports = Toclude =
         deny "Block open comment #{close.name} must be unique."
 
       close.start = openers[0].start
-      close # return from for loop
+      close # next element in for loop array
+
+    for b in blocks
+      for t in blocks
+        unless b is t
+          if (t.start > b.start and t.start < b.end) \
+              or (t.end > b.start and t.end < b.end)
+            deny "Block #{t.name} must not overlap with block #{b.name}."
 
     for b in blocks
       note.addInfo("block #{b.name} from #{b.start} to #{b.end}")
