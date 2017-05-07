@@ -35,7 +35,7 @@ module.exports = Toclude =
     if dup? then deny "Block close comment /#{dup.name} must be unique."
     note.addInfo("no dups found")
 
-    for close in closers
+    blocks = for close in closers
       note.addInfo(close.name)
       openers = Block.find_block_openers(text.slice(close.end+1))
       openers = (item for item in openers when item.name is close.name)
@@ -50,3 +50,9 @@ module.exports = Toclude =
               matching block open comment."
       if (openers.length > 1)
         deny "Block open comment #{close.name} must be unique."
+
+      close.start = openers[0].start
+      close # return from for loop
+
+    for b in blocks
+      note.addInfo("block #{b.name} from #{b.start} to #{b.end}")
