@@ -16,13 +16,10 @@ module.exports =
       if saw[b.name] then return b else saw[b.name] = true
 
   find_tag_comments: (text, tag) ->
-    pattern = oCom + tag + cCom
-    if (RegExp(pattern).test(text))
-      re = RegExp(pattern, 'g')
-      while m = re.exec(text)
-        {name: m[1], start: m.index, end: m.index + m[0].length - 1, \
-          comment: m[0]}
-    else return []
+    re = RegExp(oCom + tag + cCom, 'g')
+    while m = re.exec(text)
+      {name: m[1], start: m.index, end: m.index + m[0].length - 1, \
+        comment: m[0]}
 
   find_block_closers: (text) -> @find_tag_comments(text, cComTag)
 

@@ -38,13 +38,9 @@ module.exports = Toclude =
     tocludes = for t in tocludes
       t.parastr = RegExp("<!-- TOCLUDE: ([^>]*?) -->").exec(t.comment)[1]
       t.params = []
-      pattern = "(\\w+): (\\w+)"
-      # is this if test even necessary??
-      if true
-      #if (RegExp(pattern).test(t.parastr))
-        re = RegExp(pattern, 'g')
-        while m = re.exec(t.parastr)
-          t.params[m[1]] = m[2]
+      re = RegExp("(\\w+): (\\w+)", 'g')
+      while m = re.exec(t.parastr)
+        t.params[m[1]] = m[2]
       t # next element in for list
 
     for t in tocludes

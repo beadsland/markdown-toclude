@@ -5,7 +5,6 @@ Prep for insertion of block if not found
 ========================================
 
 -	one func return array of all TOCLUDE comment instruction tags
--	tighten find_tag_comments()
 
 Prep for insertion of transcluded content
 =========================================
