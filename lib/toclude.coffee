@@ -32,18 +32,11 @@ module.exports = Toclude =
     closers = Block.find_block_closers(text)
     blocks = Block.find_blocks_from_closers(text, closers)
     nonblocks = Block.find_nonblocks_from_blocks(text, blocks)
+    tocludes = Block.find_tocludes_comments(text)
 
-    comments = Block.find_noncloser_comments(text)
-    tocludes = (item for item in comments when item.name is "TOCLUDE")
-    tocludes = for t in tocludes
-      t.parastr = RegExp("<!-- TOCLUDE: ([^>]*?) -->").exec(t.comment)[1]
-      t.params = []
-      re = RegExp("(\\w+): (\\w+)", 'g')
-      while m = re.exec(t.parastr)
-        t.params[m[1]] = m[2]
-      t # next element in for list
-
+    i = 0
     for t in tocludes
-      note.addInfo("TOCLUDE params '#{t.parastr}'")
+      i += 1
+      note.addInfo("TOCLUDE #{i} params '#{t.paramstr}'")
       for p of t.params
-        note.addInfo("TOCLUDE params[#{p}] = #{t.params[p]}")
+        note.addInfo("TOCLUDE #{i} params[#{p}] = #{t.params[p]}")
