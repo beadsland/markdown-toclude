@@ -20,26 +20,26 @@ module.exports =
     if (RegExp(pattern).test(text))
       re = RegExp(pattern, 'g')
       while m = re.exec(text)
-        {name: m[1], start: m.index, end: m.index + m[0].length - 1}
+        {name: m[1], start: m.index, end: m.index + m[0].length - 1, \
+          comment: m[0]}
     else return []
 
   find_block_closers: (text) -> @find_tag_comments(text, cComTag)
 
-  find_block_openers: (text) -> @find_tag_comments(text, oComTag)
+  find_noncloser_comments: (text) -> @find_tag_comments(text, oComTag)
 
   find_blocks_from_closers: (text, closers) ->
     dup = @duped(closers)
     if dup? then deny "Block close comment /#{dup.name} must be unique."
-    note.addInfo("no dups found")
 
     blocks = for close in closers
-      openers = @find_block_openers(text.slice(close.end+1))
+      openers = @find_noncloser_comments(text.slice(close.end+1))
       openers = (item for item in openers when item.name is close.name)
       if (openers.length)
         deny "Block open comment #{close.name} must not trail \
               block close comment /#{close.name}."
 
-      openers = @find_block_openers(text.slice(0, close.start-1))
+      openers = @find_noncloser_comments(text.slice(0, close.start-1))
       openers = (item for item in openers when item.name is close.name)
       if (not openers.length)
         deny "Block close comment /#{close.name} must have a \
