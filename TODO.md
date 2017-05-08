@@ -1,14 +1,10 @@
 TODO
 ====
 
-Prep for insertion of block if not found
-========================================
-
--	one func return array of all TOCLUDE comment instruction tags
-
 Prep for insertion of transcluded content
 =========================================
 
+-	fix nonblocks -> slice incorrectly includes block start
 -	find first list item in non-block
 -	find specified block
 -	if specified block not found, find open tag for our block

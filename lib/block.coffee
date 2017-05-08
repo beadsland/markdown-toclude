@@ -2,7 +2,7 @@ oCom = '<!--\\s'
 cCom = '\\s-->'
 ComTag = '(\\w+)'
 oComTag = "#{ComTag}[\\w\\s\\:]*?"
-pComTag = "#{ComTag}: ([\\w\\s\\:]*) ?"
+pComTag = "#{ComTag}: ([\\w\\s\\:]*?) "
 cComTag = "/#{ComTag}"
 
 note = atom.notifications
@@ -19,7 +19,7 @@ module.exports =
   find_tag_comments: (text, tag) ->
     re = RegExp(oCom + tag + cCom, 'g')
     while m = re.exec(text)
-      {name: m[1], start: m.index, end: m.index + m[0].length - 1, \
+      {name: m[1], start: m.index, end: m.index + m[0].length, \
         comment: m[0], paramstr: m[2]}
 
   find_block_closers: (text) -> @find_tag_comments(text, cComTag)
@@ -55,10 +55,13 @@ module.exports =
       if (openers.length > 1)
         deny "Block open comment #{close.name} must be unique."
 
+      close.cComment = close.comment
+      close.oComment = openers[0].comment
+      close.start = openers[0].start
+      close.slice = text.slice(close.start, close.end)
       close # next element in for array
 
     for b in blocks
-      close.start = openers[0].start
       for t in blocks
         unless b is t
           if (t.start > b.start and t.start < b.end) \
@@ -78,4 +81,6 @@ module.exports =
           {start: blocks[i-1].end + 1, end: blocks[i].start - 1}
       nonblocks.push {start: blocks[blocks.length - 1].end, \
                        end: text.length}
-    return nonblocks
+    for n in nonblocks
+      n.slice = text.slice(n.start, n.end)
+      n # next element in for array
