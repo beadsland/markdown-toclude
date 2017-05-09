@@ -30,9 +30,15 @@ module.exports = Toclude =
     text = editor.getBuffer().getText()
 
     closers = Block.find_block_closers(text)
+    nonclosers = Block.find_noncloser_comments(text)
     blocks = Block.find_blocks_from_closers(text, closers)
     nonblocks = Block.find_nonblocks_from_blocks(text, blocks)
     tocludes = Block.find_tocludes_comments(text)
     first = Block.find_first_bullet_from_nonblocks(text, nonblocks)
 
     if first then note.addInfo("first '#{first.line}' at #{first.start}")
+
+    tag = 'BOO'
+    text = Block.insert_block_unless_found(text, tag)
+
+    editor.getBuffer().setText("#{text}.")

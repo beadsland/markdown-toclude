@@ -41,13 +41,13 @@ module.exports =
     if dup? then deny "Block close comment /#{dup.name} must be unique."
 
     blocks = for close in closers
-      openers = @find_noncloser_comments(text.slice(close.end+1))
+      openers = @find_noncloser_comments(text.slice(close.end))
       openers = (item for item in openers when item.name is close.name)
       if (openers.length)
         deny "Block open comment #{close.name} must not trail \
               block close comment /#{close.name}."
 
-      openers = @find_noncloser_comments(text.slice(0, close.start-1))
+      openers = @find_noncloser_comments(text.slice(0, close.start))
       openers = (item for item in openers when item.name is close.name)
       if (not openers.length)
         deny "Block close comment /#{close.name} must have a \
@@ -94,3 +94,18 @@ module.exports =
     firsts = (item for item in firsts when item isnt null)
 
     if firsts.length then return firsts[0]
+
+  insert_block_unless_found: (text, name) ->
+    closers = @find_block_closers(text)
+    blocks = @find_blocks_from_closers(text, closers)
+    seek = (item for item in blocks when item.name is name)[0]
+    if not seek
+      nonclosers = @find_noncloser_comments(text)
+      seek = (item for item in nonclosers when item.name is name)[0]
+      if seek
+        note.addWarning("Block closing comment /#{name} was missing. \
+                         Has been added.")
+        text = Util.insert_after(text, seek.end, "<!-- /#{name} -->")
+      else
+        note.addWarning("Didn't find a #{name} block.")
+    return text

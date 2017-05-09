@@ -4,9 +4,6 @@ TODO
 Prep for insertion of transcluded content
 -----------------------------------------
 
--	find specified block
--	if specified block not found, find open tag for our block
--	if found only open tag, insert close tag
 -	if didn't find our block insert before first list item
 -	find trash comment, append if not found
 -	garbage collect trash comment
