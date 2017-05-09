@@ -84,3 +84,13 @@ module.exports =
     for n in nonblocks
       n.slice = text.slice(n.start, n.end)
       n # next element in for array
+
+  find_first_bullet_from_nonblocks: (text, nonblocks) ->
+    firsts = for n in nonblocks
+      # \s not matching \t, so we make it explicit
+      re = RegExp("^[-+*][\s\t].*$", 'm')
+      if m = re.exec(n.slice)
+        {line: m[0], start: n.start + m.index}
+    firsts = (item for item in firsts when item isnt null)
+
+    if firsts.length then return firsts[0]

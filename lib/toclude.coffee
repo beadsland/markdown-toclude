@@ -33,10 +33,6 @@ module.exports = Toclude =
     blocks = Block.find_blocks_from_closers(text, closers)
     nonblocks = Block.find_nonblocks_from_blocks(text, blocks)
     tocludes = Block.find_tocludes_comments(text)
+    first = Block.find_first_bullet_from_nonblocks(text, nonblocks)
 
-    i = 0
-    for t in tocludes
-      i += 1
-      note.addInfo("TOCLUDE #{i} params '#{t.paramstr}'")
-      for p of t.params
-        note.addInfo("TOCLUDE #{i} params[#{p}] = #{t.params[p]}")
+    if first then note.addInfo("first '#{first.line}' at #{first.start}")
