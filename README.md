@@ -15,6 +15,6 @@ License
 
 "todoclude" is copyright © 2017 Beads Land-Trujillo.
 
-Soma source code is released under Apache 2.0 License.
+Toclude source code is released under Apache 2.0 License.
 
 Check [NOTICE](NOTICE.md) and [LICENSE](LICENSE.md) files for more information.
