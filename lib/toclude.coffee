@@ -41,4 +41,4 @@ module.exports = Toclude =
     tag = 'BOO'
     text = Block.insert_block_unless_found(text, tag)
 
-    editor.getBuffer().setText("#{text}.")
+    editor.getBuffer().setText(text)

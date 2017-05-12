@@ -87,8 +87,7 @@ module.exports =
 
   find_first_bullet_from_nonblocks: (text, nonblocks) ->
     firsts = for n in nonblocks
-      # \s not matching \t, so we make it explicit
-      re = RegExp("^[-+*][\s\t].*$", 'm')
+      re = RegExp("^[-+*]\\s.*$", 'm')
       if m = re.exec(n.slice)
         {line: m[0], start: n.start + m.index}
     firsts = (item for item in firsts when item isnt null)
@@ -107,5 +106,12 @@ module.exports =
                          Has been added.")
         text = Util.insert_after(text, seek.end, "<!-- /#{name} -->")
       else
-        note.addWarning("Didn't find a #{name} block.")
+        newstr = "\n\n<!-- #{name} --><!-- /#{name} -->\n\n"
+        nonblocks = @find_nonblocks_from_blocks(text, blocks)
+        first = @find_first_bullet_from_nonblocks(text, nonblocks)
+        if first
+          text = Util.insert_after(text, first.start, newstr)
+        else
+          [..., last] = nonblocks
+          text = Util.insert_after(text, last.start, newstr)
     return text
