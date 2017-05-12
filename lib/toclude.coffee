@@ -27,6 +27,8 @@ module.exports = Toclude =
 
   do_run: ->
     return unless editor = atom.workspace.getActiveTextEditor()
+    return unless editor.getGrammar().scopeName is "source.gfm"
+
     text = editor.getBuffer().getText()
 
     closers = Block.find_block_closers(text)
@@ -40,5 +42,4 @@ module.exports = Toclude =
 
     tag = 'BOO'
     text = Block.insert_block_unless_found(text, tag)
-
     editor.getBuffer().setText(text)

@@ -4,7 +4,6 @@ TODO
 Prep for insertion of transcluded content
 -----------------------------------------
 
--	limit operations only markdown
 -	find trash comment, append if not found
 -	garbage collect trash comment
 -	move contents of our block to trash comment
