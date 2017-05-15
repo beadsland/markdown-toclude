@@ -37,8 +37,8 @@ module.exports = Toclude =
     closers = Block.find_block_closers(text)
     blocks = Block.find_blocks_from_closers(text, closers)
     boo = (item for item in blocks when item.name is tag)[0]
-    note.addInfo(boo.content.slice)
 
     today = new Date
-
-    text = GC.push_trash(editor, today.toTimeString(), "yes\nmaybe")
+    GC.push_trash(editor, boo.content.slice, "#{today}")
+    Util.replace_in_buffer(editor, boo.content.start, boo.content.end, \
+                           "\n#{today}\n")
