@@ -1,7 +1,6 @@
 TODO
 ====
 
--	refactor block update
 -	iterate over transclusion rule comments
 -	block name option
 -	transclude source: local, target: relative path

@@ -26,19 +26,23 @@ module.exports = Toclude =
       if error.guard? then note.addError("#{error.message}")
       else note.addFatalError(error.stack)
 
-  do_run: ->
-    return unless editor = atom.workspace.getActiveTextEditor()
-    return unless editor.getGrammar().scopeName is "source.gfm"
-
-    tag = 'BOO'
+  update_block: (editor, tag, content) ->
     Block.insert_block_unless_found(editor, tag)
 
     text = editor.getText()
     closers = Block.find_block_closers(text)
     blocks = Block.find_blocks_from_closers(text, closers)
-    boo = (item for item in blocks when item.name is tag)[0]
+    block = (item for item in blocks when item.name is tag)[0]
 
-    today = new Date
-    GC.push_trash(editor, boo.content.slice, "#{today}")
-    Util.replace_in_buffer(editor, boo.content.start, boo.content.end, \
-                           "\n#{today}\n")
+    GC.push_trash(editor, block.content.slice, "#{content}")
+    Util.replace_in_buffer(editor, \
+                           block.content.start, block.content.end, \
+                           "\n#{content}\n")
+
+  do_run: ->
+    return unless editor = atom.workspace.getActiveTextEditor()
+    return unless editor.getGrammar().scopeName is "source.gfm"
+
+    content = new Date
+    tag = 'BOO'
+    @update_block(editor, tag, content)
