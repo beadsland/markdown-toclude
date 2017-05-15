@@ -41,9 +41,4 @@ module.exports = Toclude =
 
     today = new Date
 
-#    text = GC.push_trash(text, today.toTimeString(), "yes\nmaybe")
-
-    marker = editor.markBufferPosition(editor.getCursorBufferPosition())
-    marker.invalidate = 'never'
-    editor.setText(text)
-    editor.setCursorBufferPosition(marker.getBufferRange().start)
+    text = GC.push_trash(editor, today.toTimeString(), "yes\nmaybe")

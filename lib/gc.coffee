@@ -11,25 +11,24 @@ module.exports =
       return trash[0]
     else return null
 
-  clear_trash_comment: (text) ->
-    trash = @find_trash_comment(text)
-    if trash? then text = text.slice(0, trash.start - 1) \
-                          + text.slice(trash.end)
-    text
+  append_trash_comment: (editor, trash) ->
+    editor.getBuffer().append("\n\n<!-- TRASH:\n#{trash}\n -->")
 
-  append_trash_comment: (text, content) ->
-    content.replace(RegExp("-->", 'g'), "- - >")
-    top25 = content.split("\n").slice(0, 25).join("\n")
-    text = text + "\n<!-- TRASH:\n#{top25}\n -->"
+  replace_trash_comment: (editor, trash) ->
+    editor.getBuffer().replace(/\n*<!-- TRASH:[\s\S]*?-->/, "")
+    @append_trash_comment(editor, trash)
 
-  get_trash: (text) ->
+  get_trash: (editor) ->
+    text = editor.getText()
     trash = @find_trash_comment(text)
     unless trash
-      text = @append_trash_comment(text, "")
+      text = @append_trash_comment(editor, "")
       trash = @find_trash_comment(text)
     trash.content
 
   compact_trash: (trash, fresh) ->
+    trash.replace(RegExp("-->", 'g'), "- - >")
+
     seen = {}
     if fresh then for f in fresh.split("\n")
       seen[f] = true
@@ -40,11 +39,11 @@ module.exports =
       seen[l] = true
     results.join("\n")
 
-  put_trash: (text, trash) ->
-    text = @clear_trash_comment(text)
-    @append_trash_comment(text, @compact_trash(trash))
+  set_trash: (editor, trash) ->
+    trash = trash.split("\n").slice(0, 25).join("\n")
+    @replace_trash_comment(editor, trash)
 
-  push_trash: (text, stuff, fresh) ->
-    trash = @get_trash(text)
+  push_trash: (editor, stuff, fresh) ->
+    trash = @get_trash(editor)
     trash = @compact_trash("#{stuff}\n#{trash}", fresh)
-    @put_trash(text, trash)
+    @set_trash(editor, trash)
