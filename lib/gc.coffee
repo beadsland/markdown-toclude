@@ -4,7 +4,7 @@ note = atom.notifications
 
 module.exports =
   find_trash_comment: (text) ->
-    comments = Block.find_garbage_comments(text)
+    comments = Block.find_parameter_comments(text)
     trash = (can for can in comments when can.name is "TRASH")
     if trash.length
       trash[0].content = trash[0].paramstr

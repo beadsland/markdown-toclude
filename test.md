@@ -1,20 +1,20 @@
-blah
-
 <!-- BLEGH -->
 
-blah babel<!-- /BLAH -->
+blahblah babel<!-- /BLEGH -->
 
-<!-- TOCLUDE: -->
+<!-- TOCLUDE: name: SOMA target:../Soma/TODO.md -->
 
-blah babel
+<!-- TOCLUDE: name: THIS target:TODO.md -->
 
-<!-- BLAH: junk:999 -->
+<!-- BOO -->
 
-<!-- /BLAH -->
+Mon May 15 2017 05:51:53 GMT-0400 (EDT)
 
-<!-- /TOCLUDE -->
+<!-- /BOO -->
 
--	line 1
--	line 2
--	line 3
--	line 4
+-	openers
+-	tow
+
+-	hello
+
+-	world

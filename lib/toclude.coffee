@@ -5,6 +5,9 @@ GC = require './gc'
 Util = require './util'
 deny = Util.deny
 
+fs = require 'fs-plus'
+path = require 'path'
+
 note = atom.notifications
 
 module.exports = Toclude =
@@ -37,7 +40,7 @@ module.exports = Toclude =
     GC.push_trash(editor, block.content.slice, "#{content}")
     Util.replace_in_buffer(editor, \
                            block.content.start, block.content.end, \
-                           "\n#{content}\n")
+                           "\n\n#{content}\n\n")
 
   do_run: ->
     return unless editor = atom.workspace.getActiveTextEditor()
@@ -46,3 +49,16 @@ module.exports = Toclude =
     content = new Date
     tag = 'BOO'
     @update_block(editor, tag, content)
+
+    tocludes = Block.find_tocludes_comments(editor.getText())
+    for t in tocludes
+      note.addInfo("#{t.name} from #{t.params.target}")
+      edpath = path.dirname(editor.getPath())
+      file = "#{edpath}/#{t.params.target}"
+      slurp = fs.readFileSync(file, 'utf8')
+      re = RegExp("^[ \t]*[-+*][ \t].*$", 'mg')
+      match = slurp.match(re)
+      top = ""
+      if match? then top = match.slice(0, 5).join("\n")
+      note.addInfo(top)
+      @update_block(editor, t.params.name, top)
