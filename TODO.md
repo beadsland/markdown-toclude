@@ -4,7 +4,6 @@ TODO
 Prep for insertion of transcluded content
 -----------------------------------------
 
--	handle cursor position if inside trash
 -	insert dummy lines to our block
 -	move contents of our block to trash comment
 -	refactor replace contents of block

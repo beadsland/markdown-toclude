@@ -15,8 +15,10 @@ module.exports =
     editor.getBuffer().append("\n\n<!-- TRASH:\n#{trash}\n -->")
 
   replace_trash_comment: (editor, trash) ->
+    point = editor.getCursorBufferPosition()
     editor.getBuffer().replace(/\n*<!-- TRASH:[\s\S]*?-->/, "")
     @append_trash_comment(editor, trash)
+    editor.setCursorBufferPosition(point)
 
   get_trash: (editor) ->
     text = editor.getText()
