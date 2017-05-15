@@ -113,7 +113,7 @@ module.exports =
                          Has been added.")
         text = Util.insert_after(text, seek.end, "<!-- /#{name} -->")
       else
-        newstr = "\n\n<!-- #{name} --><!-- /#{name} -->\n\n"
+        newstr = "<!-- #{name} --><!-- /#{name} -->\n\n"
         nonblocks = @find_nonblocks_from_blocks(text, blocks)
         first = @find_first_bullet_from_nonblocks(text, nonblocks)
         if first
