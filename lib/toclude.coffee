@@ -3,7 +3,6 @@
 Block = require './block'
 GC = require './gc'
 Util = require './util'
-deny = Util.deny
 
 fs = require 'fs'
 path = require 'path'
@@ -30,6 +29,7 @@ module.exports = Toclude =
       else note.addFatalError(error.stack)
 
   update_block: (editor, tag, content) ->
+    tag = tag.toUpperCase()
     Block.insert_block_unless_found(editor, tag)
 
     text = editor.getText()

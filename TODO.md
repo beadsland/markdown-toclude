@@ -1,6 +1,7 @@
 TODO
 ====
 
+-	nonblocks not working properly
 -	refactor toclude iterator
 -	strip local links
 -	list header option
