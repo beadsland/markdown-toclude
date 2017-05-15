@@ -29,8 +29,6 @@ module.exports =
     trash.content
 
   compact_trash: (trash, fresh) ->
-    trash.replace(RegExp("-->", 'g'), "- - >")
-
     seen = {}
     if fresh then for f in fresh.split("\n")
       seen[f] = true
@@ -41,11 +39,12 @@ module.exports =
       seen[l] = true
     results.join("\n")
 
-  set_trash: (editor, trash) ->
+  set_trash: (editor, trash, fresh) ->
+    trash = trash.replace(/-->/g, "- - >")
+    trash = @compact_trash(trash, fresh)
     trash = trash.split("\n").slice(0, 25).join("\n")
     @replace_trash_comment(editor, trash)
 
   push_trash: (editor, stuff, fresh) ->
     trash = @get_trash(editor)
-    trash = @compact_trash("#{stuff}\n#{trash}", fresh)
-    @set_trash(editor, trash)
+    @set_trash(editor, "#{stuff}\n#{trash}", fresh)
