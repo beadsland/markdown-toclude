@@ -22,13 +22,24 @@ module.exports =
     top25 = content.split("\n").slice(0, 25).join("\n")
     text = text + "\n<!-- TRASH:\n#{top25}\n -->"
 
-  compact_trash: (content, topper) ->
+  get_trash: (text) ->
+    trash = @find_trash_comment(text)
+    unless trash
+      text = @append_trash_comment(text, "")
+      trash = @find_trash_comment(text)
+    trash.content
+
+  compact_trash: (trash, topper) ->
     seen = {}
     if topper then for t in topper.split("\n")
       seen[t] = true
 
     results = []
-    for l in content.split("\n")
+    for l in trash.split("\n")
       if not seen[l] then results.push(l)
       seen[l] = true
     results.join("\n")
+
+  put_trash: (text, trash) ->
+    text = @clear_trash_comment(text)
+    @append_trash_comment(text, @compact_trash(trash))

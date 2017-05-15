@@ -49,12 +49,8 @@ module.exports = Toclude =
     text = Block.insert_block_unless_found(text, tag)
 
 
-    trash = GC.find_trash_comment(text)
-    unless trash then text = GC.append_trash_comment(text, "")
-    trash = GC.find_trash_comment(text)
-
-    content = GC.compact_trash(trash.content, "yes\nmaybe")
-    text = GC.clear_trash_comment(text)
-    text = GC.append_trash_comment(text, content)
+    trash = GC.get_trash(text)
+    trash = GC.compact_trash(trash, "yes\nmaybe")
+    text = GC.put_trash(text, trash)
 
     editor.getBuffer().setText(text)
