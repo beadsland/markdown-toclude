@@ -5,7 +5,7 @@ GC = require './gc'
 Util = require './util'
 deny = Util.deny
 
-fs = require 'fs-plus'
+fs = require 'fs'
 path = require 'path'
 
 note = atom.notifications
@@ -45,6 +45,7 @@ module.exports = Toclude =
   do_run: ->
     return unless editor = atom.workspace.getActiveTextEditor()
     return unless editor.getGrammar().scopeName is "source.gfm"
+
 
     content = new Date
     tag = 'BOO'
