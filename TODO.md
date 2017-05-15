@@ -1,9 +1,11 @@
 TODO
 ====
 
+-	refactor toclude iterator
 -	strip local links
 -	list header option
 -	truncation option
+-	X additional items
 -	transclude source: local, target: relative path
 -	if our block empty, remove it (this ought to be optional)
 -	keep empty block option
