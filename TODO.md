@@ -4,7 +4,6 @@ TODO
 Prep for insertion of transcluded content
 -----------------------------------------
 
--	find trash comment, append if not found
 -	garbage collect trash comment
 -	move contents of our block to trash comment
 -	insert dummy lines to our block

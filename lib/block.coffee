@@ -2,7 +2,8 @@ oCom = '<!--\\s'
 cCom = '\\s-->'
 ComTag = '(\\w+)'
 oComTag = "#{ComTag}[\\w\\s\\:]*?"
-pComTag = "#{ComTag}: ([\\w\\s\\:]*?) "
+pComTag = "#{ComTag}:([\\w\\s\\:]*?)"
+gComTag = "#{ComTag}:([\\s\\S]*?)"
 cComTag = "/#{ComTag}"
 
 note = atom.notifications
@@ -20,14 +21,18 @@ module.exports =
     re = RegExp(oCom + tag + cCom, 'g')
     while m = re.exec(text)
       {name: m[1], start: m.index, end: m.index + m[0].length, \
-        comment: m[0], paramstr: m[2]}
+        comment: m[0], paramstr: m[2], length: m[0].length}
 
   find_block_closers: (text) -> @find_tag_comments(text, cComTag)
 
   find_noncloser_comments: (text) -> @find_tag_comments(text, oComTag)
 
+  find_parameter_comments: (text) -> @find_tag_comments(text, pComTag)
+
+  find_garbage_comments: (text) -> @find_tag_comments(text, gComTag)
+
   find_tocludes_comments: (text) ->
-    comments = @find_tag_comments(text, pComTag)
+    comments = @find_parameter_comments(text)
     tocludes = (item for item in comments when item.name is "TOCLUDE")
     tocludes = for t in tocludes
       t.params = []
