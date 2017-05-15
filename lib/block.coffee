@@ -101,8 +101,8 @@ module.exports =
 
     if firsts.length then return firsts[0]
 
-  insert_block_unless_found: (buffer, name) ->
-    text = buffer.getText()
+  insert_block_unless_found: (editor, name) ->
+    text = editor.getText()
     closers = @find_block_closers(text)
     blocks = @find_blocks_from_closers(text, closers)
     seek = (item for item in blocks when item.name is name)[0]
@@ -112,20 +112,15 @@ module.exports =
       if seek
         note.addWarning("Block closing comment /#{name} was missing. \
                          Has been added.")
-        buffer.insert(buffer.positionForCharacterIndex(seek.end), \
-                      "<!-- /#{name} -->")
-  #      text = Util.insert_after(text, seek.end, "<!-- /#{name} -->")
+        Util.insert_to_buffer(editor, seek.end, "<!-- /#{name} -->")
       else
         newstr = "<!-- #{name} --><!-- /#{name} -->\n\n"
         nonblocks = @find_nonblocks_from_blocks(text, blocks)
         first = @find_first_bullet_from_nonblocks(text, nonblocks)
         if first
-          buffer.insert(buffer.positionForCharacterIndex(first.start), \
-                        newstr)
-  #        text = Util.insert_after(text, first.start, newstr)
+          Util.insert_to_buffer(editor, first.start, newstr)
         else
           [..., last] = nonblocks
           buffer.insert(buffer.positionForCharacterIndex(last.start), \
                         newstr)
-  #        text = Util.insert_after(text, last.start, newstr)
-    null
+          Util.insert_to_buffer(text, last.start, newstr)

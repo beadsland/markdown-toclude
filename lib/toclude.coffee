@@ -31,7 +31,7 @@ module.exports = Toclude =
     return unless editor.getGrammar().scopeName is "source.gfm"
 
     tag = 'BOO'
-    Block.insert_block_unless_found(editor.getBuffer(), tag)
+    Block.insert_block_unless_found(editor, tag)
 
     text = editor.getText()
     closers = Block.find_block_closers(text)
