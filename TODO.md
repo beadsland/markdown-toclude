@@ -4,6 +4,8 @@ TODO
 Prep for insertion of transcluded content
 -----------------------------------------
 
+-	replace insert text method with insert buffer method
+-	replace gc insert methods with buffer methods
 -	preserve cursor position
 -	insert dummy lines to our block
 -	move contents of our block to trash comment

@@ -30,11 +30,10 @@ module.exports = Toclude =
     return unless editor = atom.workspace.getActiveTextEditor()
     return unless editor.getGrammar().scopeName is "source.gfm"
 
-    text = editor.getBuffer().getText()
-
     tag = 'BOO'
-    text = Block.insert_block_unless_found(text, tag)
+    Block.insert_block_unless_found(editor.getBuffer(), tag)
 
+    text = editor.getText()
     closers = Block.find_block_closers(text)
     blocks = Block.find_blocks_from_closers(text, closers)
     boo = (item for item in blocks when item.name is tag)[0]
@@ -42,8 +41,9 @@ module.exports = Toclude =
 
     today = new Date
 
-
-
 #    text = GC.push_trash(text, today.toTimeString(), "yes\nmaybe")
 
-    editor.getBuffer().setText(text)
+    marker = editor.markBufferPosition(editor.getCursorBufferPosition())
+    marker.invalidate = 'never'
+    editor.setText(text)
+    editor.setCursorBufferPosition(marker.getBufferRange().start)
