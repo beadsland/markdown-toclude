@@ -4,8 +4,10 @@ TODO
 Prep for insertion of transcluded content
 -----------------------------------------
 
--	move contents of our block to trash comment
+-	preserve cursor position
 -	insert dummy lines to our block
+-	move contents of our block to trash comment
+-	refactor replace contents of block
 -	if our block empty, remove it (this ought to be optional)
 
 Transclusion rules

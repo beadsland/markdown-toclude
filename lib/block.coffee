@@ -62,6 +62,8 @@ module.exports =
 
       close.cComment = close.comment
       close.oComment = openers[0].comment
+      close.content = {start: openers[0].end, end: close.start, \
+                       slice: text.slice(openers[0].end, close.start)}
       close.start = openers[0].start
       close.slice = text.slice(close.start, close.end)
       close # next element in for array

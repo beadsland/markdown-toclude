@@ -32,23 +32,18 @@ module.exports = Toclude =
 
     text = editor.getBuffer().getText()
 
-    closers = Block.find_block_closers(text)
-    nonclosers = Block.find_noncloser_comments(text)
-    blocks = Block.find_blocks_from_closers(text, closers)
-    nonblocks = Block.find_nonblocks_from_blocks(text, blocks)
-    tocludes = Block.find_tocludes_comments(text)
-    first = Block.find_first_bullet_from_nonblocks(text, nonblocks)
-
-#    paramstr = Block.find_parameter_comments(text)
-#    for n in paramstr
-#      note.addInfo("paramstr #{n.name} #{n.start} to #{n.end}")
-
-    if first then note.addInfo("first '#{first.line}' at #{first.start}")
-
     tag = 'BOO'
     text = Block.insert_block_unless_found(text, tag)
 
+    closers = Block.find_block_closers(text)
+    blocks = Block.find_blocks_from_closers(text, closers)
+    boo = (item for item in blocks when item.name is tag)[0]
+    note.addInfo(boo.content.slice)
+
     today = new Date
-    text = GC.push_trash(text, today.toTimeString(), "yes\nmaybe")
+
+
+
+#    text = GC.push_trash(text, today.toTimeString(), "yes\nmaybe")
 
     editor.getBuffer().setText(text)
