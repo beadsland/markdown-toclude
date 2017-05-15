@@ -48,9 +48,7 @@ module.exports = Toclude =
     tag = 'BOO'
     text = Block.insert_block_unless_found(text, tag)
 
-
-    trash = GC.get_trash(text)
-    trash = GC.compact_trash(trash, "yes\nmaybe")
-    text = GC.put_trash(text, trash)
+    today = new Date
+    text = GC.push_trash(text, today.toTimeString(), "yes\nmaybe")
 
     editor.getBuffer().setText(text)

@@ -29,10 +29,10 @@ module.exports =
       trash = @find_trash_comment(text)
     trash.content
 
-  compact_trash: (trash, topper) ->
+  compact_trash: (trash, fresh) ->
     seen = {}
-    if topper then for t in topper.split("\n")
-      seen[t] = true
+    if fresh then for f in fresh.split("\n")
+      seen[f] = true
 
     results = []
     for l in trash.split("\n")
@@ -43,3 +43,8 @@ module.exports =
   put_trash: (text, trash) ->
     text = @clear_trash_comment(text)
     @append_trash_comment(text, @compact_trash(trash))
+
+  push_trash: (text, stuff, fresh) ->
+    trash = @get_trash(text)
+    trash = @compact_trash("#{stuff}\n#{trash}", fresh)
+    @put_trash(text, trash)
