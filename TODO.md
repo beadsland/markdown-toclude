@@ -4,7 +4,6 @@ TODO
 Toclude v0.2.0
 --------------
 
--	first nonblock should not be 0 to -1 if first character is a block
 -	exclude comments from nonblocks
 -	nonblocks not working properly
 -	changelog

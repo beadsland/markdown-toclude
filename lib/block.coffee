@@ -86,11 +86,12 @@ module.exports =
           {start: blocks[i-1].end + 1, end: blocks[i].start - 1}
       nonblocks.push {start: blocks[blocks.length - 1].end, \
                        end: text.length}
-#    for i in [nonblocks.length - 1..0] by -1
-#      if nonblocks[i].end < nonblocks[i].start
-#        nonblocks.splice(i, 1)
+    for i in [nonblocks.length - 1..0] by -1
+      if nonblocks[i].end < nonblocks[i].start
+        nonblocks.splice(i, 1)
     for n in nonblocks
       n.slice = text.slice(n.start, n.end)
+    return nonblocks
 
   find_first_bullet_from_nonblocks: (text, nonblocks) ->
     firsts = for n in nonblocks
@@ -105,8 +106,6 @@ module.exports =
     text = editor.getText()
     closers = @find_block_closers(text)
     blocks = @find_blocks_from_closers(text, closers)
-    for b in blocks
-      note.addInfo("#{b.name} from #{b.start} to #{b.end}")
     seek = (item for item in blocks when item.name is name)[0]
     if not seek
       nonclosers = @find_noncloser_comments(text)
@@ -118,12 +117,10 @@ module.exports =
       else
         newstr = "<!-- #{name} --><!-- /#{name} -->\n\n"
         nonblocks = @find_nonblocks_from_blocks(text, blocks)
-        for b in nonblocks
-          note.addInfo("nonblock from #{b.start} to #{b.end}: #{b.slice}")
         first = @find_first_bullet_from_nonblocks(text, nonblocks)
         if first
           note.addInfo("first #{first.line} at #{first.start}")
-#          Util.insert_to_buffer(editor, first.start, newstr)
+          Util.insert_to_buffer(editor, first.start, newstr)
         else
           [..., last] = nonblocks
           Util.insert_to_buffer(editor, last.start, newstr)
