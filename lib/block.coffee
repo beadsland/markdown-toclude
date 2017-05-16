@@ -115,7 +115,7 @@ module.exports =
                          Has been added.")
         Util.insert_to_buffer(editor, seek.end, "<!-- /#{name} -->")
       else
-        newstr = "<!-- #{name} --><!-- /#{name} -->\n\n"
+        newstr = "<!-- #{name} --><!-- /#{name} -->"
         nonblocks = @find_nonblocks_from_blocks(text, blocks)
         first = @find_first_bullet_from_nonblocks(text, nonblocks)
         if first
