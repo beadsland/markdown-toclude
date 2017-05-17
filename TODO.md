@@ -4,14 +4,17 @@ TODO
 For Toclude v0.3.0
 ------------------
 
--	internalize gc prerequistes
+-	block closing comment inserted wrongly
+-	toclude cannot be a name
 -	integrate
 -	document
 -	don't coopt undo buffer
 -	eliminate redundant p vs. o distinction
+-	internalize gc prerequistes
 -	internalize block method prerequisites
 -	refactor toclude iterator
 -	strip local anchors
+-	default list header (tab transcluded items)
 -	list header option
 -	truncation option
 -	X additional items
@@ -32,3 +35,4 @@ For Toclude v0.5.0
 -	transclude github issues
 -	transclude github pull requests
 -	incorporate in master project
+-	prep changelog for major version release

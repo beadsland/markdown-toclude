@@ -131,7 +131,7 @@ module.exports =
       if seek
         note.addWarning("Block closing comment /#{name} was missing. \
                          Has been added.")
-        Util.insert_to_buffer(editor, seek.end, "<!-- /#{name} -->")
+        Util.insert_to_buffer(editor, seek.end + 1, "<!-- /#{name} -->")
       else
         newstr = "<!-- #{name} --><!-- /#{name} -->"
         nonclosers = @find_noncloser_comments(text)
