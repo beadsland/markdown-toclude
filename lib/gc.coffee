@@ -21,11 +21,11 @@ module.exports =
     editor.setCursorBufferPosition(point)
 
   get_trash: (editor) ->
-    text = editor.getText()
-    trash = @find_trash_comment(text)
+    trash = @find_trash_comment(editor.getText())
     unless trash
-      text = @append_trash_comment(editor, "")
-      trash = @find_trash_comment(text)
+      note.addInfo("no trash")
+      @append_trash_comment(editor, "")
+      trash = @find_trash_comment(editor.getText())
     trash.content
 
   compact_trash: (trash, fresh) ->
