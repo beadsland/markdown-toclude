@@ -37,10 +37,15 @@ module.exports = Toclude =
     blocks = Block.find_blocks_from_closers(text, closers)
     block = (item for item in blocks when item.name is tag)[0]
 
-    GC.push_trash(editor, block.content.slice, "#{content}")
-    Util.replace_in_buffer(editor, \
-                           block.content.start, block.content.end, \
-                           "\n\n#{content}\n\n")
+    newstr = "\n\n#{content}\n\n"
+
+    if block.content.insert?
+      Util.insert_to_buffer(editor, block.content.insert, newstr)
+    else
+      GC.push_trash(editor, block.content.slice, "#{content}")
+      Util.replace_in_buffer(editor, \
+                             block.content.start, block.content.end, \
+                             newstr)
 
   do_run: ->
     return unless editor = atom.workspace.getActiveTextEditor()
@@ -54,7 +59,7 @@ module.exports = Toclude =
 
     tocludes = Block.find_tocludes_comments(editor.getText())
     for t in tocludes
-      note.addInfo("#{t.name} from #{t.params.target}")
+#      note.addInfo("#{t.name} from #{t.params.target}")
       edpath = path.dirname(editor.getPath())
       file = "#{edpath}/#{t.params.target}"
       slurp = fs.readFileSync(file, 'utf8')
@@ -62,5 +67,5 @@ module.exports = Toclude =
       match = slurp.match(re)
       top = ""
       if match? then top = match.slice(0, 5).join("\n")
-      note.addInfo(top)
+#      note.addInfo(top)
       @update_block(editor, t.params.name, top)

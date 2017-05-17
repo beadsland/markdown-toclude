@@ -1,7 +1,7 @@
 oCom = '<!--\\s'
 cCom = '\\s-->'
 ComTag = '(\\w+)'
-oComTag = "#{ComTag}[\\w\\s\\:]*?"
+oComTag = "#{ComTag}[\\s\\S]*?"  # distinction between p & o meaningless
 pComTag = "#{ComTag}: ?([\\s\\S]*?)"
 cComTag = "/#{ComTag}"
 
@@ -20,7 +20,7 @@ module.exports =
     re = RegExp(oCom + tag + cCom, 'g')
     while m = re.exec(text)
       {name: m[1].toUpperCase(), \
-       start: m.index, end: m.index + m[0].length, \
+       start: m.index, end: m.index + m[0].length - 1, \
        comment: m[0], paramstr: m[2], length: m[0].length}
 
   find_block_closers: (text) -> @find_tag_comments(text, cComTag)
@@ -60,8 +60,15 @@ module.exports =
 
       close.cComment = close.comment
       close.oComment = openers[0].comment
-      close.content = {start: openers[0].end, end: close.start, \
-                       slice: text.slice(openers[0].end, close.start)}
+
+      # need to give start even if no content -- hmm
+
+      if openers[0].end + 1 is close.start
+        close.content = {insert: close.start}
+      else
+        close.content = {start: openers[0].end + 1, end: close.start - 1}
+        close.content.slice = text.slice(close.content.start, \
+                                         close.content.end)
       close.start = openers[0].start
       close.slice = text.slice(close.start, close.end)
       close # next element in for array
@@ -75,7 +82,19 @@ module.exports =
 
     return blocks # find_blocks_from_closers
 
-  find_nonblocks_from_blocks: (text, blocks) ->
+  start_sorter: (a, b) ->
+    if a.start > b.start then       return 1
+    else if a.start < b.start then  return -1
+    else                            return 0
+
+  find_nonblocks_from_blocks_and_nonclosers: (text, blocks, nonclosers) ->
+    for n in nonclosers
+      dup = false
+      for b in blocks
+        if n.start is b.start then dup = true
+      if dup is false then blocks.push n
+    blocks = blocks.sort(@start_sorter)
+
     nonblocks = []
     unless (blocks.length)
       nonblocks = [{start: 0, end: text.length - 1}]
@@ -84,10 +103,10 @@ module.exports =
         if i is 0 then {start: 0, end: blocks[0].start - 1}
         else
           {start: blocks[i-1].end + 1, end: blocks[i].start - 1}
-      nonblocks.push {start: blocks[blocks.length - 1].end, \
+      nonblocks.push {start: blocks[blocks.length - 1].end + 1, \
                        end: text.length}
     for i in [nonblocks.length - 1..0] by -1
-      if nonblocks[i].end < nonblocks[i].start
+      if nonblocks[i].end <= nonblocks[i].start
         nonblocks.splice(i, 1)
     for n in nonblocks
       n.slice = text.slice(n.start, n.end)
@@ -95,11 +114,10 @@ module.exports =
 
   find_first_bullet_from_nonblocks: (text, nonblocks) ->
     firsts = for n in nonblocks
-      re = RegExp("^[-+*]\\s.*$", 'm')
+      re = RegExp("\\n*^[-+*]\\s.*$", 'm')
       if m = re.exec(n.slice)
         {line: m[0], start: n.start + m.index}
-    firsts = (item for item in firsts when item isnt null)
-
+    firsts = (item for item in firsts when item isnt undefined)
     if firsts.length then return firsts[0]
 
   insert_block_unless_found: (editor, name) ->
@@ -116,10 +134,12 @@ module.exports =
         Util.insert_to_buffer(editor, seek.end, "<!-- /#{name} -->")
       else
         newstr = "<!-- #{name} --><!-- /#{name} -->"
-        nonblocks = @find_nonblocks_from_blocks(text, blocks)
+        nonclosers = @find_noncloser_comments(text)
+        nonblocks = @find_nonblocks_from_blocks_and_nonclosers(text, \
+                                                               blocks, \
+                                                               nonclosers)
         first = @find_first_bullet_from_nonblocks(text, nonblocks)
         if first
-          note.addInfo("first #{first.line} at #{first.start}")
           Util.insert_to_buffer(editor, first.start, newstr)
         else
           [..., last] = nonblocks

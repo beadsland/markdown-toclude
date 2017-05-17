@@ -2,17 +2,9 @@
 
 blahblah babel<!-- /BLEGH -->
 
-<!-- TOCLUDE: name: SOMA target:../Soma/TODO.md -->
+<!-- TOCLUDE: name: soma TARGET:../Soma/TODO.md -->
 
-<!-- TOCLUDE: name: THIS target:TODO.md -->
-
-<!-- BOO -->
-
-Mon May 15 2017 06:52:10 GMT-0400 (EDT)
-
-<!-- /BOO -->
-
-<!-- SOMA -->
+<!-- toclude: NAME: this target:TODO.md --><!-- SOMA -->
 
 -	[Utilities](#utilities)  
 -	[Literals](#literals)
@@ -22,47 +14,44 @@ Mon May 15 2017 06:52:10 GMT-0400 (EDT)
 
 <!-- /SOMA -->
 
-<!-- THIS -->
+<!-- BOO -->
 
--	strip local links
--	list header option
--	truncation option
--	X additional items
--	transclude source: local, target: relative path
+Tue May 16 2017 23:20:04 GMT-0400 (EDT)
+
+<!-- /BOO --><!-- THIS -->
+
+-	when block has no content, erroneously chopping off end of opener
+-	insert position end of last block, not beginning of list item
+-	exclude comments from nonblocks
+-	changelog
+-	version
 
 <!-- /THIS -->
 
--	openers
--	tow
-
--	hello
-
--	world
-
 <!-- TRASH:
 
-Mon May 15 2017 06:52:09 GMT-0400 (EDT)
+Tue May 16 2017 23:19:07 GMT-0400 (EDT)
 <!-- a - - >
 <!-- b - - >
-Mon May 15 2017 06:52:08 GMT-0400 (EDT)
-Mon May 15 2017 06:52:07 GMT-0400 (EDT)
-Mon May 15 2017 06:52:04 GMT-0400 (EDT)
-Mon May 15 2017 06:51:28 GMT-0400 (EDT)
--   iterate over transclusion rule comments
--   if our block empty, remove it (this ought to be optional)
--   keep empty block option
-Mon May 15 2017 06:07:33 GMT-0400 (EDT)
-Mon May 15 2017 06:06:50 GMT-0400 (EDT)
-Mon May 15 2017 06:06:47 GMT-0400 (EDT)
-Mon May 15 2017 06:06:30 GMT-0400 (EDT)
-Mon May 15 2017 06:06:14 GMT-0400 (EDT)
-Mon May 15 2017 06:06:12 GMT-0400 (EDT)
-Mon May 15 2017 06:05:57 GMT-0400 (EDT)
-Mon May 15 2017 06:05:56 GMT-0400 (EDT)
-Mon May 15 2017 06:05:34 GMT-0400 (EDT)
--   ignore target comment block option
--   load and refresh target (local markdown)
--   restrict to user (e.g. beads)
--   transclude github issues
--   transclude github pull requests
+Tue May 16 2017 23:18:32 GMT-0400 (EDT)
+Tue May 16 2017 23:18:17 GMT-0400 (EDT)
+Tue May 16 2017 23:18:05 GMT-0400 (EDT)
+Tue May 16 2017 20:06:27 GMT-0400 (EDT)
+Tue May 16 2017 19:59:51 GMT-0400 (EDT)
+Tue May 16 2017 19:57:20 GMT-0400 (EDT)
+Tue May 16 2017 19:56:33 GMT-0400 (EDT)
+Tue May 16 2017 19:54:08 GMT-0400 (EDT)
+>
+Tue May 16 2017 19:48:11 GMT-0400 (EDT)
+Tue May 16 2017 19:47:48 GMT-0400 (EDT)
+Tue May 16 2017 19:47:20 GMT-0400 (EDT)
+Tue May 16 2017 19:46:50 GMT-0400 (EDT)
+Tue May 16 2017 19:46:42 GMT-0400 (EDT)
+Tue May 16 2017 19:46:14 GMT-0400 (EDT)
+Tue May 16 2017 19:46:03 GMT-0400 (EDT)
+Tue May 16 2017 19:45:10 GMT-0400 (EDT)
+Tue May 16 2017 19:44:16 GMT-0400 (EDT)
+Tue May 16 2017 19:43:23 GMT-0400 (EDT)
+Tue May 16 2017 19:42:45 GMT-0400 (EDT)
+Tue May 16 2017 18:51:27 GMT-0400 (EDT)
  -->

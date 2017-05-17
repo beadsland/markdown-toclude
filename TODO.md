@@ -4,8 +4,6 @@ TODO
 Toclude v0.2.0
 --------------
 
--	exclude comments from nonblocks
--	nonblocks not working properly
 -	changelog
 -	version
 -	integrate
@@ -14,6 +12,8 @@ Toclude v0.3.0
 --------------
 
 -	document
+-	don't coopt undo buffer
+-	eliminate redundant p vs. o distinction
 -	internalize block method prerequisites
 -	refactor toclude iterator
 -	strip local anchors
