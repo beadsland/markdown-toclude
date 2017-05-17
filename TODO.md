@@ -4,8 +4,6 @@ TODO
 For Toclude v0.3.0
 ------------------
 
--	integrate
--	document
 -	don't coopt undo buffer
 -	eliminate redundant p vs. o distinction
 -	internalize gc prerequistes
@@ -13,7 +11,8 @@ For Toclude v0.3.0
 -	refactor toclude iterator
 -	strip local anchors
 -	default list header (tab transcluded items)
--	list header option
+-	specify text for list header
+-	specify level (incl. list item) for header
 -	truncation option
 -	X additional items
 
@@ -32,5 +31,5 @@ For Toclude v0.5.0
 
 -	transclude github issues
 -	transclude github pull requests
--	incorporate in master project
+-	prepend license to source files
 -	prep changelog for major version release

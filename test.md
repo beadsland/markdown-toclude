@@ -16,42 +16,32 @@ blahblah babel<!-- /BLEGH -->
 
 <!-- BOO -->
 
-Tue May 16 2017 23:20:04 GMT-0400 (EDT)
+Wed May 17 2017 16:46:06 GMT-0400 (EDT)
 
 <!-- /BOO --><!-- THIS -->
 
--	when block has no content, erroneously chopping off end of opener
--	insert position end of last block, not beginning of list item
--	exclude comments from nonblocks
--	changelog
--	version
+-	block add can't hijack end of line (might be a header underline)
+-	integrate
+-	document
+-	don't coopt undo buffer
+-	eliminate redundant p vs. o distinction
 
 <!-- /THIS -->
 
+-	blah
+
 <!-- TRASH:
 
-Tue May 16 2017 23:19:07 GMT-0400 (EDT)
-<!-- a - - >
-<!-- b - - >
-Tue May 16 2017 23:18:32 GMT-0400 (EDT)
-Tue May 16 2017 23:18:17 GMT-0400 (EDT)
-Tue May 16 2017 23:18:05 GMT-0400 (EDT)
-Tue May 16 2017 20:06:27 GMT-0400 (EDT)
-Tue May 16 2017 19:59:51 GMT-0400 (EDT)
-Tue May 16 2017 19:57:20 GMT-0400 (EDT)
-Tue May 16 2017 19:56:33 GMT-0400 (EDT)
-Tue May 16 2017 19:54:08 GMT-0400 (EDT)
->
-Tue May 16 2017 19:48:11 GMT-0400 (EDT)
-Tue May 16 2017 19:47:48 GMT-0400 (EDT)
-Tue May 16 2017 19:47:20 GMT-0400 (EDT)
-Tue May 16 2017 19:46:50 GMT-0400 (EDT)
-Tue May 16 2017 19:46:42 GMT-0400 (EDT)
-Tue May 16 2017 19:46:14 GMT-0400 (EDT)
-Tue May 16 2017 19:46:03 GMT-0400 (EDT)
-Tue May 16 2017 19:45:10 GMT-0400 (EDT)
-Tue May 16 2017 19:44:16 GMT-0400 (EDT)
-Tue May 16 2017 19:43:23 GMT-0400 (EDT)
-Tue May 16 2017 19:42:45 GMT-0400 (EDT)
-Tue May 16 2017 18:51:27 GMT-0400 (EDT)
+Wed May 17 2017 16:45:08 GMT-0400 (EDT)
+Wed May 17 2017 16:44:10 GMT-0400 (EDT)
+Wed May 17 2017 16:43:56 GMT-0400 (EDT)
+Wed May 17 2017 16:34:00 GMT-0400 (EDT)
+Wed May 17 2017 16:33:38 GMT-0400 (EDT)
+Wed May 17 2017 16:32:55 GMT-0400 (EDT)
+Wed May 17 2017 16:32:28 GMT-0400 (EDT)
+Wed May 17 2017 16:32:06 GMT-0400 (EDT)
+Tue May 16 2017 23:59:32 GMT-0400 (EDT)
+-   cannot read error when trash first placed
+-   eliminate redundant p vs. o distinction
+Tue May 16 2017 23:56:03 GMT-0400 (EDT)
  -->
