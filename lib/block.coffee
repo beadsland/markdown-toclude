@@ -115,7 +115,11 @@ module.exports =
 
   find_first_bullet_from_nonblocks: (text, nonblocks) ->
     firsts = for n in nonblocks
-      re = RegExp("\\n*^[-+*]\\s.*$", 'm')
+
+      # back up to --> if only carriage returns
+      # otherwise, drop in front of first bullet
+
+      re = RegExp("^[-+*]\\s.*$", 'm')
       if m = re.exec(n.slice)
         {line: m[0], start: n.start + m.index}
     firsts = (item for item in firsts when item isnt undefined)
@@ -141,7 +145,9 @@ module.exports =
                                                                nonclosers)
         first = @find_first_bullet_from_nonblocks(text, nonblocks)
         if first
-          Util.insert_to_buffer(editor, first.start, newstr)
+          Util.insert_to_buffer(editor, first.start, "#{newstr}\n\n")
+          re = RegExp("-->\n+#{newstr}")  # tighten if before a comment
+          editor.getBuffer().replace(re, "-->#{newstr}")
         else
           [..., last] = nonblocks
           Util.insert_to_buffer(editor, last.start, newstr)
