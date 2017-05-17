@@ -57,13 +57,17 @@ module.exports = Toclude =
 
     tocludes = Block.find_tocludes_comments(editor.getText())
     for t in tocludes
-#      note.addInfo("#{t.name} from #{t.params.target}")
-      edpath = path.dirname(editor.getPath())
-      file = "#{edpath}/#{t.params.target}"
-      slurp = fs.readFileSync(file, 'utf8')
-      re = RegExp("^[ \t]*[-+*][ \t].*$", 'mg')
-      match = slurp.match(re)
-      top = ""
-      if match? then top = match.slice(0, 5).join("\n")
-#      note.addInfo(top)
-      @update_block(editor, t.params.name, top)
+      note.addInfo("#{t.name}")
+      note.addInfo("#{t.params.name} from #{t.params.target}")
+
+      if t.params.name.toUpperCase() is t.name.toUpperCase()
+        note.addError("Block name must not be #{t.name}: name is reserved.")
+      else
+        edpath = path.dirname(editor.getPath())
+        file = "#{edpath}/#{t.params.target}"
+        slurp = fs.readFileSync(file, 'utf8')
+        re = RegExp("^[ \t]*[-+*][ \t].*$", 'mg')
+        match = slurp.match(re)
+        top = ""
+        if match? then top = match.slice(0, 5).join("\n") else top = ""
+        @update_block(editor, t.params.name, top)

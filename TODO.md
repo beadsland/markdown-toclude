@@ -4,8 +4,6 @@ TODO
 For Toclude v0.3.0
 ------------------
 
--	block closing comment inserted wrongly
--	toclude cannot be a name
 -	integrate
 -	document
 -	don't coopt undo buffer

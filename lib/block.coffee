@@ -31,7 +31,8 @@ module.exports =
 
   find_tocludes_comments: (text) ->
     comments = @find_parameter_comments(text)
-    tocludes = (item for item in comments when item.name is "TOCLUDE")
+    tocludes = (item for item in comments \
+                              when item.name.toUpperCase() is "TOCLUDE")
     for t in tocludes
       t.params = []
       re = RegExp("(\\w+): ?(\\S+)", 'g')
