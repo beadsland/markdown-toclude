@@ -51,8 +51,6 @@ module.exports = Toclude =
     return unless editor = atom.workspace.getActiveTextEditor()
     return unless editor.getGrammar().scopeName is "source.gfm"
 
-    GC.push_trash(editor, "<!-- a -->\n<!-- b -->")
-
     content = new Date
     tag = 'BOO'
     @update_block(editor, tag, content)

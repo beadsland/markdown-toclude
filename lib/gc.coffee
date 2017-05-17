@@ -23,7 +23,6 @@ module.exports =
   get_trash: (editor) ->
     trash = @find_trash_comment(editor.getText())
     unless trash
-      note.addInfo("no trash")
       @append_trash_comment(editor, "")
       trash = @find_trash_comment(editor.getText())
     trash.content

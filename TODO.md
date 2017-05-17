@@ -4,7 +4,6 @@ TODO
 For Toclude v0.3.0
 ------------------
 
--	drop junk trash content
 -	internalize gc prerequistes
 -	integrate
 -	document
