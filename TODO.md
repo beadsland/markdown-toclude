@@ -1,16 +1,10 @@
 TODO
 ====
 
-Toclude v0.2.0
---------------
+For Toclude v0.3.0
+------------------
 
--	changelog
--	version
 -	integrate
-
-Toclude v0.3.0
---------------
-
 -	document
 -	don't coopt undo buffer
 -	eliminate redundant p vs. o distinction
@@ -21,8 +15,8 @@ Toclude v0.3.0
 -	truncation option
 -	X additional items
 
-Toclude v0.4.0
---------------
+For Toclude v0.4.0
+------------------
 
 -	link to source markdown
 -	if our block empty, remove it (this ought to be optional)
@@ -31,8 +25,8 @@ Toclude v0.4.0
 -	load and refresh target (local markdown)
 -	restrict to user (e.g. beads)
 
-Toclude v0.5.0
---------------
+For Toclude v0.5.0
+------------------
 
 -	transclude github issues
 -	transclude github pull requests
