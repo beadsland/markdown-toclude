@@ -17,13 +17,13 @@ Usage
 
 Toclude may be used to transclude items from any number of sources. (For now, only local markdown files are supported as sources.) Each source to be transcluded is identified using a `TOCLUDE` comment, as follows:
 
-```
+```html
 <!-- TOCLUDE: name: *TAG* target: *CLUDEME.md* -->
 ```
 
-In the above example, we've instructed toclude to transclude lines from the file `CLUDEME.md` in the same directory, and insert those lines within the [comment block](#comment-block-syntax) named `TAG`.
+In the above example, we've instructed toclude to transclude lines from the file `CLUDEME.md` in the same local directory as the transcluding file, and insert those lines within the [comment block](#comment-block-syntax) named `TAG`.
 
-Currently, toclude will process all `TOCLUDE` comments, and update associated blocks, on the hotkey `ctrl-alt-o`. This will eventually be replaced by a before-save event handler, but this is still prerelease code.
+Currently, toclude will process all `TOCLUDE` comments, and update associated blocks, on the hotkey <kbd>ctrl</kbd>\-<kbd>alt</kbd>\-<kbd>o</kbd>. This will eventually be replaced by a before-save event handler, but this is still prerelease code.
 
 Toclude will seek an existing comment block of the name given, and replace its contents if found. If not found, it will insert a new block with that name immediately before the first top-level list item not, itself, enclosed in a comment block (*i.e.*, the first list item not presumably managed by toclude or another plugin). If no top-level list items are found in the including file, the new comment block will be inserted immediately following the last comment (ignoring [`TRASH`](#garbage-collection)) found in the file.
 
@@ -32,17 +32,21 @@ Comment Block Syntax
 
 Toclude inserts transcluded content within an HTML comment block, like so:
 
-```
+```html
 <!-- TAG -->
 
-- *first transcluded line*
-- *second transcluded line*
-- *...*
--
+- first transcluded line
+- second transcluded line
+- ...
+
 <!-- /TAG -->
 ```
 
-To avoid clobbering itself or other plugins that mutate markdown documents, toclude insists that only well-formed comment blocks be present in the transcluding markdown file. The following conditions will raise errors: - **orphan**: A closing comment is found without a matching open comment. - **trailing**: A closing comment is followed by its matching open comment. - **non-unique**: A closing comment is repeated or has more than one matching open comment. - **overlap**: A closing comment from one comment block appears within another comment block.
+To avoid clobbering itself or other plugins that mutate markdown documents, toclude insists that only well-formed comment blocks be present in the transcluding markdown file. The following conditions will raise errors:
+* **orphan**: A closing comment is found without a matching open comment.
+* **trailing**: A closing comment is followed by its matching open comment.
+* **non-unique**: A closing comment is repeated or has more than one matching open comment.
+* **overlap**: A closing comment from one comment block appears within another comment block.
 
 On the other hand, if toclude finds the opening comment of a named comment block, but no matching closing comment, it will append the matching closing comment and raise a warning. This may happen if a block closing comment is mistakenly deleted from a file, in which case, previously transcluded lines may need to be cleaned up, having being left outside the newly reformed block.
 
@@ -54,7 +58,7 @@ Toclude replaces the contents of comment blocks named in `TOCLUDE` comments each
 License
 =======
 
-"todoclude" is copyright © 2017 Beads Land-Trujillo.
+"toclude" is copyright © 2017 Beads Land-Trujillo.
 
 Toclude source code is released under MIT License.
 
