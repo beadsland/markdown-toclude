@@ -24,11 +24,15 @@ module.exports = Toclude =
 
   run: ->
     note.addSuccess('toclude running')
-    try @do_run() catch error
+    return unless editor = atom.workspace.getActiveTextEditor()
+    return unless editor.getGrammar().scopeName is "source.gfm"
+
+    try @do_run(editor) catch error
+      editor.abortTransaction()
       if error.guard? then note.addError("#{error.message}")
       else note.addFatalError(error.stack)
 
-  update_block: (editor, tag, content) ->
+  do_update_block: (editor, tag, content) ->
     tag = tag.toUpperCase()
     Block.insert_block_unless_found(editor, tag)
 
@@ -47,10 +51,10 @@ module.exports = Toclude =
                              block.content.start, block.content.end, \
                              newstr)
 
-  do_run: ->
-    return unless editor = atom.workspace.getActiveTextEditor()
-    return unless editor.getGrammar().scopeName is "source.gfm"
+  update_block: (editor, tag, content) ->
+    editor.transact(=> @do_update_block(editor, tag, content))
 
+  do_run: (editor) ->
     content = new Date
     tag = 'BOO'
     @update_block(editor, tag, content)

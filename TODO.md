@@ -4,7 +4,6 @@ TODO
 For Toclude v0.3.0
 ------------------
 
--	don't coopt undo buffer
 -	eliminate redundant p vs. o distinction
 -	internalize gc prerequistes
 -	internalize block method prerequisites

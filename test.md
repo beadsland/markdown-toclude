@@ -29,19 +29,3 @@ Wed May 17 2017 16:46:06 GMT-0400 (EDT)
 <!-- /THIS -->
 
 -	blah
-
-<!-- TRASH:
-
-Wed May 17 2017 16:45:08 GMT-0400 (EDT)
-Wed May 17 2017 16:44:10 GMT-0400 (EDT)
-Wed May 17 2017 16:43:56 GMT-0400 (EDT)
-Wed May 17 2017 16:34:00 GMT-0400 (EDT)
-Wed May 17 2017 16:33:38 GMT-0400 (EDT)
-Wed May 17 2017 16:32:55 GMT-0400 (EDT)
-Wed May 17 2017 16:32:28 GMT-0400 (EDT)
-Wed May 17 2017 16:32:06 GMT-0400 (EDT)
-Tue May 16 2017 23:59:32 GMT-0400 (EDT)
--   cannot read error when trash first placed
--   eliminate redundant p vs. o distinction
-Tue May 16 2017 23:56:03 GMT-0400 (EDT)
- -->
