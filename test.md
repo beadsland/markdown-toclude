@@ -6,25 +6,28 @@ blahblah babel<!-- /BLEGH -->
 
 <!-- toclude: NAME: this target:TODO.md --><!-- SOMA -->
 
--	[Utilities](#utilities)  
+-	[Utilities](#utilities)
+	-	[toclude](#toclude)  
+	-	[myps1](#myps1)  
+	-	[bin/](#bin)  
 -	[Literals](#literals)
-	-	[basic term framework](#basic-term-framework)  
-	-	[fully flesh out integer](#fully-flesh-out-integer)  
-	-	[fully flesh out numbers](#fully-flesh-out-numbers)  
+
 
 <!-- /SOMA -->
 
 <!-- BOO -->
 
-Wed May 17 2017 16:46:06 GMT-0400 (EDT)
+Wed May 17 2017 23:49:49 GMT-0400 (EDT)
+
 
 <!-- /BOO --><!-- THIS -->
 
--	block add can't hijack end of line (might be a header underline)
--	integrate
--	document
--	don't coopt undo buffer
 -	eliminate redundant p vs. o distinction
+-	internalize gc prerequistes
+-	internalize block method prerequisites
+-	refactor toclude iterator
+-	strip local anchors
+
 
 <!-- /THIS -->
 

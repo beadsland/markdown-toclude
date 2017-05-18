@@ -31,4 +31,5 @@ For Toclude v0.5.0
 -	transclude github issues
 -	transclude github pull requests
 -	prepend license to source files
+- plugin framework
 -	prep changelog for major version release

@@ -1,5 +1,5 @@
 {
-  "name": "toclude",
+  "name": "markdown-toclude",
   "main": "./lib/toclude",
   "version": "0.2.0",
   "description": "Atom plugin to transclude list items into markdown files",
